@@ -1,5 +1,5 @@
 # FunctionChain
-A very short and capable lib by kotlin.
+A very short and capable sequential lib by kotlin.
 
 ### Foo:
 ```
