@@ -1,0 +1,3 @@
+rootProject.name = 'BlockChain'
+include ':lib-blockchain'
+
