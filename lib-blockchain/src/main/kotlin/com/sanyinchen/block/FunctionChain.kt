@@ -9,7 +9,10 @@ import com.sanyinchen.block.base.Action
  * @version v0.1
  * @since 19-11-6
  */
-class FunctionChain(private var interceptors: MutableList<Interceptor> = mutableListOf()) {
+class FunctionChain(
+    private var interceptors: MutableList<Interceptor> = mutableListOf(),
+    private val initDispatch: DispatchFunction? = null
+) {
 
     fun addInterceptor(interceptor: Interceptor) {
         if (!interceptors.contains(interceptor)) {
@@ -29,6 +32,8 @@ class FunctionChain(private var interceptors: MutableList<Interceptor> = mutable
     }
 
     fun defaultDispatch(action: Action) {
-        println("===> default Action")
+        initDispatch?.let {
+            it(action)
+        }
     }
 }
