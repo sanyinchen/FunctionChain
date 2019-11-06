@@ -9,7 +9,7 @@ import com.sanyinchen.block.base.Action
  * @version v0.1
  * @since 19-11-6
  */
-class BlockChain(private var interceptors: MutableList<Interceptor> = mutableListOf()) {
+class FunctionChain(private var interceptors: MutableList<Interceptor> = mutableListOf()) {
 
     fun addInterceptor(interceptor: Interceptor) {
         if (!interceptors.contains(interceptor)) {
@@ -24,6 +24,7 @@ class BlockChain(private var interceptors: MutableList<Interceptor> = mutableLis
                 .fold({ action: Action -> this.defaultDispatch(action) }, { dispatchFunction, interceptor ->
                     interceptor(dispatchFunction)
                 })
+
         }()(action)
     }
 

@@ -1,6 +1,6 @@
 package com.sanyinchen.foo
 
-import com.sanyinchen.block.BlockChain
+import com.sanyinchen.block.FunctionChain
 import com.sanyinchen.block.base.Action
 
 /**
@@ -11,12 +11,7 @@ import com.sanyinchen.block.base.Action
  * @since 19-11-6
  */
 fun main() {
-    val blockChain = BlockChain(mutableListOf({ next ->
-        {
-            println("====> first2");
-            next(it)
-        }
-    }))
+    val blockChain = FunctionChain(mutableListOf())
 
     blockChain.addInterceptor { next ->
         {
