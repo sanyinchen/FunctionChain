@@ -13,26 +13,24 @@ import com.sanyinchen.block.base.Action
  */
 fun main() {
     val blockChain = FunctionChain(mutableListOf(), { action ->
-        println("====>action")
         println(action)
     })
 
-    blockChain.addInterceptor test@{ next ->
+    blockChain.addInterceptor first@{ next ->
         println("wrap===> first")
-        return@test {
+        return@first {
             println("====> first");
             next(it)
         }
     }
-    blockChain.addInterceptor test@{ next: DispatchFunction ->
+    blockChain.addInterceptor second@{ next: DispatchFunction ->
         println("wrap===> second")
-        return@test {
+        return@second {
             println("====> second");
             next(it)
         }
     }
     val testAction: Action = object : Action {
-        val test = 1;
     }
     blockChain.dispatch(testAction)
 }
