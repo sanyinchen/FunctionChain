@@ -33,4 +33,5 @@ fun main() {
     val testAction: Action = object : Action {
     }
     blockChain.dispatch(testAction)
+
 }

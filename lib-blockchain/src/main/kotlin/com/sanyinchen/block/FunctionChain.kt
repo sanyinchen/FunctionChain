@@ -10,8 +10,8 @@ import com.sanyinchen.block.base.Action
  * @since 19-11-6
  */
 class FunctionChain(
-    private var interceptors: MutableList<Interceptor> = mutableListOf(),
-    private val initDispatch: DispatchFunction? = null
+    private val interceptors: MutableList<Interceptor> = mutableListOf(),
+    private val initDispatch: DispatchFunction
 ) {
 
     fun addInterceptor(interceptor: Interceptor) {
@@ -24,16 +24,11 @@ class FunctionChain(
         {
             interceptors
                 .asReversed()
-                .fold({ action: Action -> this.defaultDispatch(action) }, { dispatchFunction, interceptor ->
+                .fold({ action: Action -> this.initDispatch(action) }, { dispatchFunction, interceptor ->
                     interceptor(dispatchFunction)
                 })
 
         }()(action)
     }
 
-    fun defaultDispatch(action: Action) {
-        initDispatch?.let {
-            it(action)
-        }
-    }
 }
